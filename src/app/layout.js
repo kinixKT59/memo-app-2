@@ -4,7 +4,7 @@ export default function Layout({ children }) {
   return (
     <html lang="ja">
       <head>
-        <title>メモアプリ</title>
+        <title>Sample Memo App </title>
       </head>
       <body>
         <header style={styles.header}>
@@ -16,7 +16,7 @@ export default function Layout({ children }) {
         </main>
         
         <footer style={styles.footer}>
-          <p>© 2023 メモアプリ</p>
+          <p>© 2024 メモアプリ</p>
         </footer>
       </body>
     </html>
