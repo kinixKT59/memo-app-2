@@ -3,14 +3,20 @@ import { useState, useEffect } from "react";
 import{ loadMemos, saveMemos } from "./loadMemos";
 import ToDoList from "./todolist";
 
+interface Memo {
+  text: string;
+  hasTodo: boolean;
+  todos: string[];
+}
+
 export default function Home() {
-  const [memos, setMemos] = useState([
+  const [memos, setMemos] = useState<Memo[]>([
     { text: "サンプルメモ", hasTodo: false, todos: [] }
   ]);
   
-  const [newMemo, setNewMemo] = useState("");
-  const [isEditing, setIsEditing] = useState(null); 
-  const [editingText, setEditingText] = useState(""); 
+  const [newMemo, setNewMemo] = useState<string>("");
+  const [isEditing, setIsEditing] = useState<number | null>(null); 
+  const [editingText, setEditingText] = useState<string>(""); 
 
   const handleMemoAdd = () => {
     if (newMemo.trim() === "") return;
@@ -18,16 +24,16 @@ export default function Home() {
     setNewMemo("");
   };
 
-  const handleMemoDelete = (index) => {
+  const handleMemoDelete = (index: number) => {
     setMemos(memos.filter((_, i) => i !== index));
   };
 
-  const handleMemoEdit = (index) => {
+  const handleMemoEdit = (index: number) => {
   setIsEditing(index);
   setEditingText(memos[index].text);
   };
 
-  const handleEditSave = (index) => {
+  const handleEditSave = (index: number) => {
   const updatedMemos = [...memos];
   updatedMemos[index].text = editingText;
   setMemos(updatedMemos);
@@ -35,13 +41,13 @@ export default function Home() {
   setEditingText("");
   };
 
-  const handleTodoListCheck = (index) => {
+  const handleTodoListCheck = (index: number) => {
     const updatedMemos = [...memos];
     updatedMemos[index].hasTodo = !updatedMemos[index].hasTodo;
     setMemos(updatedMemos);
   };
 
-  const handleTodoAdd = (index, todo) => {
+  const handleTodoAdd = (index: number, todo: string) => {
     const updatedMemos = [...memos];
     updatedMemos[index].todos.push(todo);
     setMemos(updatedMemos);
@@ -95,7 +101,7 @@ export default function Home() {
             {memo.hasTodo && (
           <ToDoList
             todos={memo.todos}
-            addTodo={(todo) => handleTodoAdd(index, todo)}
+            addTodo={(todo: string) => handleTodoAdd(index, todo)}
             />
             )}
          </li>

@@ -1,6 +1,12 @@
 import { useState } from "react";
 
-export default function ToDoList({ todos, addTodo }) {
+interface ToDoListProps {
+  todos: string[];
+  addTodo: (todo: string) => void;
+}
+
+
+export default function ToDoList({ todos, addTodo }:ToDoListProps) {
   const [newTodo, setNewTodo] = useState("");
 
   const handleAddTodo = () => {
@@ -13,7 +19,7 @@ export default function ToDoList({ todos, addTodo }) {
     <div>
       <h3>To-Doリスト</h3>
       <ul>
-        {todos.map((todo, index) => (
+        {todos.map((todo: string, index: number) => (
           <li key={index}>{todo}</li>
         ))}
       </ul>

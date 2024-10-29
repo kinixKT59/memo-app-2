@@ -1,10 +1,14 @@
-// app/layout.js
+import React, { ReactNode } from "react"; // ReactNode 型をインポート
 
-export default function Layout({ children }) {
+interface LayoutProps {
+  children: ReactNode; // children の型を定義
+}
+
+export default function Layout({ children }: LayoutProps) {
   return (
     <html lang="ja">
       <head>
-        <title>Sample Memo App </title>
+        <title>Sample Memo App</title>
       </head>
       <body>
         <header style={styles.header}>
@@ -23,7 +27,8 @@ export default function Layout({ children }) {
   );
 }
 
-const styles = {
+// 各スタイルプロパティの型を定義
+const styles: { [key: string]: React.CSSProperties } = {
   header: {
     backgroundColor: "#333",
     color: "white",
@@ -41,4 +46,3 @@ const styles = {
     textAlign: "center",
   },
 };
-
