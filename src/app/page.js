@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import{ loadMemos, saveMemos } from "./loadMemos";
-import ToDoList from "./ToDoList";
+import ToDoList from "./todolist";
 
 export default function Home() {
   const [memos, setMemos] = useState([
