@@ -1,34 +1,50 @@
 "use client";
 import { useState, useEffect } from "react";
-import{ loadMemos, saveMemos } from "./localStorage";
+import{ loadMemos, saveMemos } from "./loadMemos";
+import ToDoList from "./ToDoList";
 
 export default function Home() {
-  const [memos, setMemos] = useState([]);
+  const [memos, setMemos] = useState([
+    { text: "サンプルメモ", hasTodo: false, todos: [] }
+  ]);
+  
   const [newMemo, setNewMemo] = useState("");
-  const [isEditing, setIsEditing] = useState(null); // 編集モードのインデックス
-  const [editingText, setEditingText] = useState(""); // 編集中のテキスト
+  const [isEditing, setIsEditing] = useState(null); 
+  const [editingText, setEditingText] = useState(""); 
 
-  const handleAddMemo = () => {
+  const handleMemoAdd = () => {
     if (newMemo.trim() === "") return;
-    setMemos([...memos, newMemo]);
+    setMemos([...memos, { text: newMemo, hasTodo: false, todos: [] }]);
     setNewMemo("");
   };
 
-  const handleDeleteMemo = (index) => {
+  const handleMemoDelete = (index) => {
     setMemos(memos.filter((_, i) => i !== index));
   };
 
-  const handleEditMemo = (index) => {
+  const handleMemoEdit = (index) => {
   setIsEditing(index);
-  setEditingText(memos[index]);
+  setEditingText(memos[index].text);
   };
 
-  const handleSaveEdit = (index) => {
+  const handleEditSave = (index) => {
   const updatedMemos = [...memos];
-  updatedMemos[index] = editingText;
+  updatedMemos[index].text = editingText;
   setMemos(updatedMemos);
   setIsEditing(null);
   setEditingText("");
+  };
+
+  const handleTodoListCheck = (index) => {
+    const updatedMemos = [...memos];
+    updatedMemos[index].hasTodo = !updatedMemos[index].hasTodo;
+    setMemos(updatedMemos);
+  };
+
+  const handleTodoAdd = (index, todo) => {
+    const updatedMemos = [...memos];
+    updatedMemos[index].todos.push(todo);
+    setMemos(updatedMemos);
   };
 
   useEffect(() => {
@@ -49,28 +65,40 @@ export default function Home() {
         onChange={(e) => setNewMemo(e.target.value)}
         placeholder="メモを入力"
       />
-      <button onClick={handleAddMemo}>追加</button>
+      <button onClick={handleMemoAdd}>メモを追加</button>
+                    
       {memos.length === 0 ? (
         <p>メモがありません。</p>
       ) : (
         <ul>
           {memos.map((memo, index) => (
             <li key={index}>
-               {isEditing === index ? (
-                 <div><input
+               <h2>{memo.text}</h2>
+             {isEditing === index ? (
+                 <div>
+                  <input
                  type="text"
                  value={editingText}
                  onChange={(e) => setEditingText(e.target.value)}/>
-               <button onClick={() => handleSaveEdit(index)}>保存</button>
+               <button onClick={() => handleEditSave(index)}>保存</button>
                </div>
                ):(
               <div>
-              {memo}
-              <button onClick={() =>handleEditMemo(index)}>編集</button>
-              <button onClick={() => handleDeleteMemo(index)}>削除</button>
+              <button onClick={() =>handleMemoEdit(index)}>編集</button>
+              <button onClick={() => handleMemoDelete(index)}>削除</button>
               </div>
              )}
-            </li>
+
+             <button onClick={() => handleTodoListCheck(index)}>
+             {memo.hasTodo ? "To-Doを削除" : "To-Doを追加"}
+            </button>
+            {memo.hasTodo && (
+          <ToDoList
+            todos={memo.todos}
+            addTodo={(todo) => handleTodoAdd(index, todo)}
+            />
+            )}
+         </li>
           ))}
         </ul>
       )}
