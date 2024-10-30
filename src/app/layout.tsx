@@ -20,7 +20,7 @@ export default function Layout({ children }: LayoutProps) {
         </main>
         
         <footer style={styles.footer}>
-          <p>© 2024 メモアプリ</p>
+          <p>© 2024 メモアプリ KT</p>
         </footer>
       </body>
     </html>

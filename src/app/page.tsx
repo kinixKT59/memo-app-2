@@ -17,6 +17,7 @@ export default function Home() {
   const [newMemo, setNewMemo] = useState<string>("");
   const [isEditing, setIsEditing] = useState<number | null>(null); 
   const [editingText, setEditingText] = useState<string>(""); 
+  const [globalTodos, setGlobalTodos] = useState<string[]>([]);
 
   const handleMemoAdd = () => {
     if (newMemo.trim() === "") return;
@@ -41,16 +42,12 @@ export default function Home() {
   setEditingText("");
   };
 
-  const handleTodoListCheck = (index: number) => {
-    const updatedMemos = [...memos];
-    updatedMemos[index].hasTodo = !updatedMemos[index].hasTodo;
-    setMemos(updatedMemos);
+  const handleTodosChange = (todos: string[]) => {
+    setGlobalTodos(todos);
   };
 
-  const handleTodoAdd = (index: number, todo: string) => {
-    const updatedMemos = [...memos];
-    updatedMemos[index].todos.push(todo);
-    setMemos(updatedMemos);
+  const handleClearTodos = () => {
+    setGlobalTodos([]);
   };
 
   useEffect(() => {
@@ -72,13 +69,13 @@ export default function Home() {
         placeholder="メモを入力"
       />
       <button onClick={handleMemoAdd}>メモを追加</button>
-                    
+
       {memos.length === 0 ? (
         <p>メモがありません。</p>
       ) : (
         <ul>
           {memos.map((memo, index) => (
-            <li key={index}>
+            <li key={index} className="memoText">
                <h2>{memo.text}</h2>
              {isEditing === index ? (
                  <div>
@@ -94,20 +91,20 @@ export default function Home() {
               <button onClick={() => handleMemoDelete(index)}>削除</button>
               </div>
              )}
-
-             <button onClick={() => handleTodoListCheck(index)}>
-             {memo.hasTodo ? "To-Doを削除" : "To-Doを追加"}
-            </button>
-            {memo.hasTodo && (
+            {/* {memo.hasTodo && (
           <ToDoList
             todos={memo.todos}
-            addTodo={(todo: string) => handleTodoAdd(index, todo)}
+            addTodo={(todo: string) => handleTodoAdd(todo)}
             />
-            )}
+            )} */}
          </li>
           ))}
         </ul>
       )}
+      
+      <h2>To-Doリスト</h2>
+      <ToDoList initialTodos={globalTodos} onTodosChange={handleTodosChange} />
+      <button onClick={handleClearTodos}>To-Doを削除</button>
     </div>
   );
 }
