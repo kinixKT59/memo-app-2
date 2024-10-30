@@ -7,11 +7,6 @@ interface ToDoListProps {
   
 }
 
-interface TodoItem {
-  text: string;
-  checked: boolean;
-}
-
 export default function ToDoList({initialTodos, onTodosChange }:ToDoListProps) {
   const [todos, setTodos] = useState(initialTodos.map(todo => ({ text: todo, checked: false })));
   const [newTodo, setNewTodo] = useState("");
