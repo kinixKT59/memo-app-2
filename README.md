@@ -1,36 +1,18 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## 概要
+ 使用したフレームワークや技術は以下の通りです。
+<br>言語：TypeScript
+<br>フレームワーク：Next.js
+<br>ライブラリ：React
+<br> このウェブアプリは自分が学んできたことを示すものであり、今後自作ウェブアプリを作るたの練習台のようなものです。
+<br> このウェブアプリはメモアプリとなっており、メモの追加、編集、削除ができます。また、リロードしても消えないようにLocalStorage内に保存されます。メモの下にはTo-Doリストを作りました。To-Doリストは追加した項目ごとにチェックボックスが現れ、クリックすることで項目の内容が達成できたか示すことができます。また、To-Doリストは全項目の削除が一つのボタンでできます。
 
-## Getting Started
+## リンク
+https://memo-app-2.vercel.app/
 
-First, run the development server:
+## 他のプロジェクト
+私は、ArukuArupakaというサークルでアプリ開発に関する知識を学んできました。下の画像は「歩くアルパカ＋R」というアプリの自分の担当した画面となっております。
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+![アルパカ画像1](public/S__101146667_0.jpg)
+![アルパカ画像2](public/S__101146669_0.jpg)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+<br>私が担当したのは、駐輪場の画面とリンク一覧の画面です。駐輪場の画面は、マップ上に押した箇所に自転車のアイコンが表示され、固定ボタンでアイコンを固定できます。また、いつアイコンを押したのか表示され、下のアルファベットを押すことで、自動的にマップのアルファベットの箇所に移動できます。リンク一覧の画面では、立命生が良く使うサイトを表示しており、カテゴリーごとに飛べるサイトを設定しております。また、サイトはアプリ内で表示されます。さらに、右のピンマークを押すことでサイトを一番上に固定できます。
